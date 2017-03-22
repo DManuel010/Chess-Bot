@@ -5,9 +5,6 @@ def startGame():
     # clear_stack
     return chess.Board()
 
-def displayBoard(board):
-    print board
-
 def randomAI(board): #Selects one of the legal moves randomly and returns it
     moves = []
     for move in board.legal_moves:
@@ -43,20 +40,31 @@ def pascalTest():
         color!=color
 
 def drewTest():
-    turn = 0       # turn counter
+    turns = 0       # turn counter
     stillPlaying = True     # outer loop boolean
     player_white = True     # white = true, black = false
 
-    init_board = startGame()
-    displayBoard(init_board)
+    board = startGame()
 
     while stillPlaying:
 
-        if player_white:
-            print "white moves"
+        board.push(randomAI(board))
+        turns += 1
 
-        else:
-            print "black moves"
+        print board
+        print "=================="
+
+        if (board.is_stalemate() or board.is_insufficient_material() or
+            board.can_claim_threefold_repetition() or board.can_claim_fifty_moves() or
+            board.can_claim_draw()):
+
+            print "DRAW"
+            stillPlaying = false
+            print "number of moves: " , turns
+
+        elif board.is_game_over() or board.is_checkmate():
+            
+
 
 def main():
     pascalTest()
