@@ -37,7 +37,7 @@ def pascalTest():
                 print "Black Won"
             print "Number of Moves: ",num
             break;
-        color!=color
+        color=color
 
 def drewTest():
     turns = 0       # turn counter
@@ -59,14 +59,22 @@ def drewTest():
             board.can_claim_draw()):
 
             print "DRAW"
-            stillPlaying = false
+            stillPlaying = False
             print "number of moves: " , turns
 
-        elif board.is_game_over() or board.is_checkmate():
-            
+        elif board.is_game_over() and board.is_checkmate():
 
+            if player_white:
+                print "White Won"
+            else:
+                print "Black Won"
+
+            print turns
+            stillPlaying = False
+
+        color != color
 
 def main():
-    pascalTest()
+    drewTest()
 
 main()
