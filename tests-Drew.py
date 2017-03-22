@@ -21,39 +21,6 @@ def randomAI(board): #Selects one of the legal moves randomly and returns it
 
 
 
-def pascalTest():
-    board = chess.Board()
-    color = True #True=White Black=false
-    num = 0 #Number of moves
-    turn = True
-    #Runs the chess game until win, draw, or stalemate hmmm
-    while(True):
-        if turn:
-            board.push(pascalMinimax(board,2))
-            color = False
-            turn = False
-        else:
-            board.push(randomAI(board))
-            color = True
-            turn = True
-        num=num+1
-        print board
-        print "=============================="
-        if board.is_stalemate() or board.is_insufficient_material() or board.can_claim_threefold_repetition() or board.can_claim_fifty_moves() or board.can_claim_draw():
-            print "Stalemate or Draw"
-            print "Number of Moves: ",num
-            break;
-        if board.is_game_over() or board.is_checkmate():
-            if color:
-                print "White Won"
-            else:
-                print "Black Won"
-            print "Number of Moves: ",num
-            break;
-        color=color
-
-
-
 def drewTest():
     turns = 0               # turn counter
     stillPlaying = True     # outer loop boolean
@@ -83,13 +50,14 @@ def drewTest():
             print "number of moves: " , turns
             stillPlaying = False
 
-<<<<<<< Updated upstream
         elif board.is_game_over() and board.is_checkmate():
-=======
-        elif board.is_game_over() or board.is_checkmate():
-            print "DRAW"
-            stillPlaying = false
+
+            print "Winner: " , currentPlayer
             print "number of moves: " , turns
+            stillPlaying = False
+
+
+
 def pascalMinimax(board,depth):
     best_move = None
     best_score = -9999
@@ -108,6 +76,8 @@ def pascalMinimax(board,depth):
         newBoard.pop() #undos last move
     return chess.Move.from_uci(str(best_move))
 
+
+
 def maxi(gameState, depth):
         if gameState.is_game_over(): return evaluate(gameState)
         if depth==0: return 0
@@ -125,6 +95,9 @@ def maxi(gameState, depth):
                 maxScore = score
             newBoard.pop() #undos last move
         return maxScore
+
+
+
 def mini(gameState, depth):
         if gameState.is_game_over(): return evaluate(gameState)
         if depth ==0: return 0
@@ -143,6 +116,8 @@ def mini(gameState, depth):
             newBoard.pop() #undos last move
         return minScore
 
+
+
     #Evaluates terminal state
 def evaluate(board):
         if (board.is_stalemate() or board.is_insufficient_material() or
@@ -150,12 +125,6 @@ def evaluate(board):
             board.can_claim_draw()):
             return 0
         else: return 10
->>>>>>> Stashed changes
-
-            print "Winner: " , currentPlayer
-            print "number of moves: " , turns
-            stillPlaying = False
-
 
 
 def main():
