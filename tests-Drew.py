@@ -1,9 +1,13 @@
 import chess
 import random
 
+
+
 def startGame():
     # clear_stack
     return chess.Board()
+
+
 
 def randomAI(board): #Selects one of the legal moves randomly and returns it
     moves = []
@@ -14,6 +18,8 @@ def randomAI(board): #Selects one of the legal moves randomly and returns it
         move = random.choice(moves)
 
     return chess.Move.from_uci(str(move))
+
+
 
 def pascalTest():
     board = chess.Board()
@@ -46,17 +52,25 @@ def pascalTest():
             break;
         color=color
 
-def drewTest():
-    turns = 0       # turn counter
-    stillPlaying = True     # outer loop boolean
-    player_white = True     # white = true, black = false
 
+
+def drewTest():
+    turns = 0               # turn counter
+    stillPlaying = True     # outer loop boolean
+    player1 = "white"
+    player2 = "black"
+    players = [player1, player2]
     board = startGame()
 
     while stillPlaying:
 
-        board.push(randomAI(board))
         turns += 1
+        if turns % 2 > 0:
+            currentPlayer = players[0]
+        else:
+            currentPlayer = players[1]
+
+        board.push(randomAI(board))
 
         print board
         print "=================="
@@ -66,8 +80,8 @@ def drewTest():
             board.can_claim_draw()):
 
             print "DRAW"
-            stillPlaying = False
             print "number of moves: " , turns
+            stillPlaying = False
 
 <<<<<<< Updated upstream
         elif board.is_game_over() and board.is_checkmate():
@@ -138,17 +152,14 @@ def evaluate(board):
         else: return 10
 >>>>>>> Stashed changes
 
-            if player_white:
-                print "White Won"
-            else:
-                print "Black Won"
-
-            print turns
+            print "Winner: " , currentPlayer
+            print "number of moves: " , turns
             stillPlaying = False
 
-        color != color
+
 
 def main():
+
     drewTest()
 
 main()
