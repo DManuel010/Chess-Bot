@@ -20,7 +20,7 @@ def pascalTest():
     color = True #True=White Black=false
     num = 0 #Number of moves
 
-    #Runs the chess game until win, draw, or stalemate
+    #Runs the chess game until win, draw, or stalemate hmmm
     while(True):
         board.push(randomAI(board))
         num=num+1
