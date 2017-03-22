@@ -17,12 +17,13 @@ def pascalMinimax(board,depth,player):
             best_move = move
             best_score = score
         newBoard.pop() #undos last move
+    print best_score
     return chess.Move.from_uci(str(best_move))
 
 
 
 def maxi(gameState, depth, player):
-        if gameState.is_game_over(): return evaluate(gameState, player)
+        if gameState.is_game_over(): return evaluate(gameState, "black")
         if depth==0: return 0
         maxScore = -99
         newBoard = gameState
@@ -43,7 +44,7 @@ def maxi(gameState, depth, player):
 
 def mini(gameState, depth, player):
         if gameState.is_game_over():
-            return evaluate(gameState, player)
+            return evaluate(gameState, "white")
         if depth == 0:
             return 0
         minScore = 99
