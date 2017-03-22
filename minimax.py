@@ -1,4 +1,7 @@
-def pascalMinimax(board,depth):
+import chess
+import random
+
+def pascalMinimax(board,depth,player):
     best_move = None
     best_score = -9999
     newBoard = board #Makes the move on the board copy
@@ -9,7 +12,7 @@ def pascalMinimax(board,depth):
     #Executes minimax function
     for move in moves:
         newBoard.push(move)
-        score = mini(newBoard, depth)
+        score = mini(newBoard, depth, player)
         if score > best_score:
             best_move = move
             best_score = score
@@ -18,10 +21,10 @@ def pascalMinimax(board,depth):
 
 
 
-def maxi(gameState, depth):
-        if gameState.is_game_over(): return evaluate(gameState)
+def maxi(gameState, depth, player):
+        if gameState.is_game_over(): return evaluate(gameState, player)
         if depth==0: return 0
-        maxScore = -99999
+        maxScore = -99
         newBoard = gameState
         #Generates a list of moves from legal moves
         moves = []
@@ -30,7 +33,7 @@ def maxi(gameState, depth):
         #Executes max function
         for move in moves:
             newBoard.push(move)
-            score = mini(newBoard, depth-1) #Calls min function
+            score = mini(newBoard, depth-1, player) #Calls min function
             if score > maxScore:
                 maxScore = score
             newBoard.pop() #undos last move
@@ -38,10 +41,12 @@ def maxi(gameState, depth):
 
 
 
-def mini(gameState, depth):
-        if gameState.is_game_over(): return evaluate(gameState)
-        if depth ==0: return 0
-        minScore = 99999
+def mini(gameState, depth, player):
+        if gameState.is_game_over():
+            return evaluate(gameState, player)
+        if depth == 0:
+            return 0
+        minScore = 99
         newBoard = gameState
         #Generates a list of moves from legal moves
         moves = []
@@ -50,7 +55,7 @@ def mini(gameState, depth):
         #Executes max function
         for move in moves:
             newBoard.push(move)
-            score = maxi(newBoard, depth-1) #Calls min function
+            score = maxi(newBoard, depth-1, player) #Calls min function
             if score < minScore:
                 minScore = score
             newBoard.pop() #undos last move
@@ -59,9 +64,15 @@ def mini(gameState, depth):
 
 
     #Evaluates terminal state
-def evaluate(board):
+def evaluate(board, player):
+
         if (board.is_stalemate() or board.is_insufficient_material() or
             board.can_claim_threefold_repetition() or board.can_claim_fifty_moves() or
             board.can_claim_draw()):
             return 0
-        else: return 10
+
+        if player == "white":
+            return 999
+
+        else:
+            return -999

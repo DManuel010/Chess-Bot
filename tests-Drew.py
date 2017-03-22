@@ -1,5 +1,6 @@
 import chess
 import random
+from minimax import pascalMinimax
 
 
 def startGame():
@@ -33,10 +34,13 @@ def drewTest():
         turns += 1
         if turns % 2 > 0:
             currentPlayer = players[0]
+            board.push(pascalMinimax(board, 2, currentPlayer))
         else:
             currentPlayer = players[1]
+            board.push(randomAI(board))
 
-        board.push(randomAI(board))
+        # board.push(randomAI(board))   # random move
+        # board.push(pascalMinimax(board, 2))    # minimax
 
         print board
         print "=================="
