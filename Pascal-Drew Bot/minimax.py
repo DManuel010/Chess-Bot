@@ -1,8 +1,8 @@
 import chess
-from heuristic import heuristicFunction
+from pascalH import pascalHueristic
 
 
-def minimax(board,depth,player):
+def pascalMinimax(board,depth,player):
 
     best_move = None
     best_score = -9999
@@ -33,9 +33,7 @@ def maxi(gameState, depth, player):
     if gameState.is_game_over():
         return evaluate(gameState, "black")
 
-    if depth == 0:
-        return heuristicFunction(gameState)
-
+    if depth==0: return pascalHueristic(gameState)
     maxScore = -99
     newBoard = gameState
 
@@ -64,7 +62,7 @@ def mini(gameState, depth, player):
         return evaluate(gameState, "white")
 
     if depth == 0:
-        return heuristicFunction(gameState)
+        return pascalHueristic(gameState)
 
     minScore = 99
     newBoard = gameState
