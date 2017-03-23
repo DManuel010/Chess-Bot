@@ -21,9 +21,9 @@ def pascalHueristic(board):
             square = board.piece_at(chess.square(squareRank,squareFile))
 
             if square in piecesValuesWhite:
-                whiteSum+=piecesValuesWhite[square]
+                whiteSum += piecesValuesWhite[square]
 
             elif square in piecesValuesBlack:
-                blackSum+=piecesValuesBlack[square]
+                blackSum += piecesValuesBlack[square]
 
-    return whiteSum-blackSum
+    return whiteSum - blackSum

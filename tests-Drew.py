@@ -1,33 +1,17 @@
 import chess
-import random
 from minimax import pascalMinimax
-from minimax import alpha_beta_search
+from alpha_beta import alpha_beta_search
+from random_AI import randomAI
+
 
 def startGame():
-    
+
     # clear_stack
     return chess.Board()
 
 
 
-def randomAI(board):
-    '''
-    Selects one of the legal moves randomly and returns it
-    '''
-
-    moves = []
-    for move in board.legal_moves:
-        moves.append(move)
-
-    move = random.choice(moves)
-    while not chess.Move.from_uci(str(move)) in board.legal_moves:
-        move = random.choice(moves)
-
-    return chess.Move.from_uci(str(move))
-
-
-
-def drewTest():
+def main():
     '''
     Simulates a game of chess by looping two AI players' actions
     '''
@@ -64,9 +48,5 @@ def drewTest():
             print "Winner: " , currentPlayer
             print "number of moves: " , turns
             stillPlaying = False
-
-def main():
-
-    drewTest()
 
 main()
