@@ -56,6 +56,6 @@ def evaluationFunction(board):
                 if middleOfBoard(squareRank, squareFile):
                     middleBlack += 1
 
-    value = (whiteSum - blackSum) + (middleWhite - middleBlack) # evaluation value
+    value = (whiteSum - blackSum) #+ (middleWhite - middleBlack) # evaluation value
 
     return value

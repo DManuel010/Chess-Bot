@@ -23,7 +23,7 @@ def main():
 
     players = [player1, player2]
     board = startGame()             # gets initial board state
-    print board
+    #print board
 
     while stillPlaying:
 
@@ -36,17 +36,46 @@ def main():
             currentPlayer = players[1]
             board.push(randomAI(board))
 
-        print board
-        print "=================="
+        #print board
+        #print "=================="
 
         if (board.is_stalemate() or board.is_insufficient_material()):
-            print "DRAW"
-            print "number of moves: " , turns
+            return ("draw", turns)
+            #print "DRAW"
+            #print "number of moves: " , turns
             stillPlaying = False
 
         elif board.is_game_over() and board.is_checkmate():
-            print "Winner: " , currentPlayer
-            print "number of moves: " , turns
+            return (currentPlayer, turns)
+            #print "Winner: " , currentPlayer
+            #print "number of moves: " , turns
             stillPlaying = False
 
-main()
+i = 0
+games = []
+totalMoves = 0
+whiteCount = 0
+blackCount = 0
+drawCount = 0
+
+while i < 15:
+    currentGame = main()
+    games.append(currentGame)
+    totalMoves += currentGame[1]
+
+    if currentGame[0] == "white":
+        whiteCount += 1
+    elif currentgame[0] == "black":
+        blackCount += 1
+    else:
+        drawCount += 1
+
+    i += 1
+
+totalGames = whiteCount + blackCount + drawCount
+averageMoves = totalMoves / totalGames
+print games
+print "white games won: " , whiteCount
+print "black games won: " , blackCount
+print "games with draw: " , drawCount
+print "Average moves: " , averageMoves
