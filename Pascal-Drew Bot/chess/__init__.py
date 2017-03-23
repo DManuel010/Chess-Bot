@@ -28,6 +28,8 @@ __email__ = "niklas.fiekas@backscattering.de"
 
 __version__ = "0.17.0"
 
+__all__ = ["gaviota", "pgn", "polyglot", "svg", "syzygy", "uci", "variant"]
+
 import copy
 import re
 import itertools
