@@ -12,17 +12,17 @@ def middleOfBoard(x, y):
 
 
 
-def heuristicFunction(board):
+def evaluationFunction(board):
     '''
-    Heuristic function used to evaluate node values for the minimax function.
+    Evaluation function used to evaluate node values for the minimax function.
 
-    Heuristic value depends upon two factors:
+    Evaluation value depends upon two factors:
         1) The difference in total value of the remaining white and black pieces.
         2) The difference in amount of middle squares controlled by each player.
 
     For instance, if White has more pieces that are of greater value than Black,
     and there are more White pieces in the middle squares than Black, then
-    the heuristic score for that state will be higher.  The opposite is also true.
+    the evaluation score for that state will be higher.  The opposite is also true.
     '''
 
     piecesValuesWhite = {chess.Piece.from_symbol('P'):1, chess.Piece.from_symbol('R'):5,
@@ -55,7 +55,7 @@ def heuristicFunction(board):
 
                 if middleOfBoard(squareRank, squareFile):
                     middleBlack += 1
-                    
-    value = (whiteSum - blackSum) + (middleWhite - middleBlack) # heuristic value
+
+    value = (whiteSum - blackSum) + (middleWhite - middleBlack) # evaluation value
 
     return value

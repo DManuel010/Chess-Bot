@@ -1,5 +1,5 @@
 import chess
-from heuristic import heuristicFunction
+from evaluation import evaluationFunction
 
 
 def alpha_beta_search(board, player,depth):
@@ -36,7 +36,7 @@ def max_value(gameState, alpha, beta, player,depth):
         getUtility(gameState,player)
 
     if depth == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     infinity = float('inf')
     value = -infinity
@@ -47,7 +47,7 @@ def max_value(gameState, alpha, beta, player,depth):
         successors.append(move)
 
     if len(successors) == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     for state in successors:
         newState.push(state)
@@ -70,7 +70,7 @@ def min_value(gameState, alpha, beta, player,depth):
         getUtility(gameState,player)
 
     if depth == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     infinity = float('inf')
     value = infinity
@@ -81,7 +81,7 @@ def min_value(gameState, alpha, beta, player,depth):
         successors.append(move)
 
     if len(successors) == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     for state in successors:
         newState.push(state)

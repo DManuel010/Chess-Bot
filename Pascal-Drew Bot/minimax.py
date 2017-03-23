@@ -1,5 +1,5 @@
 import chess
-from heuristic import heuristicFunction
+from evaluation import evaluationFunction
 
 
 def minimaxFunction(board,depth,player):
@@ -34,7 +34,7 @@ def maxi(gameState, depth, player):
         return evaluate(gameState, "black")
 
     if depth == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     maxScore = -99
     newBoard = gameState
@@ -64,7 +64,7 @@ def mini(gameState, depth, player):
         return evaluate(gameState, "white")
 
     if depth == 0:
-        return heuristicFunction(gameState)
+        return evaluationFunction(gameState)
 
     minScore = 99
     newBoard = gameState
