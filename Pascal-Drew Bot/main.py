@@ -1,5 +1,5 @@
 import chess
-from minimax import pascalMinimax
+from minimax import minimaxFunction
 from alpha_beta import alpha_beta_search
 from random_AI import randomAI
 
@@ -30,7 +30,7 @@ def main():
         turns += 1
         if turns % 2 > 0:
             currentPlayer = players[0]
-            board.push(pascalMinimax(board,1,currentPlayer))
+            board.push(minimaxFunction(board,1,currentPlayer))
             #move = alpha_beta_search(board, currentPlayer,2) DO NOT DO ALPHA BETA IT DOES NOT WORK
         else:
             currentPlayer = players[1]
