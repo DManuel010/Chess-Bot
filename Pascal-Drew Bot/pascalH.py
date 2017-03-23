@@ -25,5 +25,5 @@ def pascalHueristic(board):
 
             elif square in piecesValuesBlack:
                 blackSum += piecesValuesBlack[square]
-    
+
     return whiteSum - blackSum
