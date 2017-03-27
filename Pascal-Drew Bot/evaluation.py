@@ -1,5 +1,5 @@
 import chess
-
+import chess.uci
 
 def middleOfBoard(x, y):
 
@@ -12,7 +12,7 @@ def middleOfBoard(x, y):
 
 
 
-def evaluationFunction(board):
+def evaluationFunction(board, whoMoved, player):
     '''
     Evaluation function used to evaluate node values for the minimax function.
 
@@ -56,6 +56,12 @@ def evaluationFunction(board):
                 if middleOfBoard(squareRank, squareFile):
                     middleBlack += 1
 
-    value = (whiteSum - blackSum) #+ (middleWhite - middleBlack) # evaluation value
+    value = (whiteSum - blackSum) + (middleWhite - middleBlack) # evaluation value
+    if board.is_checkmate() and whoMoved==player:
+        print "Dont mind me, Im just a terminal leaf that found that white won"
+        return 999
+    elif board.is_checkmate() and whoMoved!=player:
+        return -999
+
 
     return value
