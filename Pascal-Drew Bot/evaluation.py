@@ -1,6 +1,5 @@
 import chess
 import chess.uci
-
 def middleOfBoard(x, y):
 
     coordinate = (x, y)
@@ -39,8 +38,8 @@ def evaluationFunction(board, whoMoved, player):
     middleWhite = 0     # total white pieces in middle four squares
     middleBlack = 0     # total black pieces in middle four squares
 
+    #Goes through each square in the board matrix. If the piece is white, then it takes the piece's value and adds it to whiteSum. Same thing for black.
     for squareRank in range(8):
-
         for squareFile in range(8):
             square = board.piece_at(chess.square(squareRank,squareFile))
 
@@ -57,11 +56,13 @@ def evaluationFunction(board, whoMoved, player):
                     middleBlack += 1
 
     value = (whiteSum - blackSum) + (middleWhite - middleBlack) # evaluation value
+
+
+
+    #Returns score for terminal states
     if board.is_checkmate() and whoMoved==player:
-        print "Dont mind me, Im just a terminal leaf that found that white won"
         return 999
     elif board.is_checkmate() and whoMoved!=player:
         return -999
-
 
     return value
