@@ -1,7 +1,7 @@
 import chess
 from evaluation import evaluationFunction
 
-
+import chess.syzygy
 import chess
 from evaluation import evaluationFunction
 import chess.polyglot
@@ -38,6 +38,7 @@ def alpha_beta_search(board, player,theDepth):
                 if best_score > beta:
                     return best_score
             if depth == 0:
+                #print "best score ",best_score
                 return chess.Move.from_uci(str(best_move))
             else:
                 return best_score
@@ -71,6 +72,12 @@ def alpha_beta_search(board, player,theDepth):
 
         best_move = None
         best_weight = None
+        endGameValue = 0
+
+
+
+
+        #Does a move from the opening book if one is available
         try:
             with chess.polyglot.open_reader("/Users/pascal/Desktop/Chess-Bot1/Pascal-Drew Bot/gm2001.bin") as reader:
                 for entry in reader.find_all(board):
@@ -81,6 +88,7 @@ def alpha_beta_search(board, player,theDepth):
                     print "opening move", best_move
                     return best_move
                 else:
+                    #Does alpha beta search and evaluationFunction
                     print "max agent"
                     return max_agent(board, 0, float("-inf"), float("inf"))
         except IndexError:
@@ -94,15 +102,13 @@ def getLegalMoves(board):
 
 
 
-def getUtility(gameState,player):
 
-    assert gameState is not None
-    return evaluate(gameState,player)
+
 
 
 def stockFish(board):
     engine = chess.uci.popen_engine("/Users/pascal/Desktop/Chess-Bot1/Pascal-Drew Bot/Stockfish/src/stockfish")
     engine.uci()
     engine.position(board)
-    best_move, ponder_move = engine.go(movetime=5000)
+    best_move, ponder_move = engine.go(movetime=1000)
     return best_move
