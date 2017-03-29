@@ -3,7 +3,6 @@ from minimax import minimaxFunction
 from alpha_beta import alpha_beta_search
 from random_AI import randomAI
 from alpha_beta import stockFish
-
 def startGame():
 
     # clear_stack
@@ -14,9 +13,9 @@ def depthCalculator(numberOfMoves):
     if numberOfMoves<5:
         return 2
     if numberOfMoves<10:
-        return 2
+        return 1
     if numberOfMoves>9 and numberOfMoves<15:
-        return 2
+        return 1
     if numberOfMoves>14:
         return 1
 
@@ -41,7 +40,7 @@ def main():
             print "white Turn:"
             currentPlayer = players[0]
             depth = depthCalculator(len(board.legal_moves))
-            board.push(alpha_beta_search(board, "white",depth)) #New alpha beta, works, but sometimes crashes in error.
+            board.push(alpha_beta_search(board, currentPlayer,2)) #New alpha beta, works, but sometimes crashes in error.
         else:
             print "black Turn"
             currentPlayer = players[1]
